@@ -1,0 +1,22 @@
+env:
+- DOCKER_TAG=debian:jessie
+- DOCKER_TAG=debian:stretch
+- DOCKER_TAG=debian:buster
+- DOCKER_TAG=ubuntu:xenial
+- DOCKER_TAG=ubuntu:trusty
+- DOCKER_TAG=ubuntu:bionic
+
+services:
+   - docker
+
+script:
+   - ./deb_build.sh
+
+deploy:
+   provider: releases
+   api_key:
+      secure: qg78d+nRiEe9FVtjspressLqkXNk2RY1xUxmW0VOt86la2vlHd6FOUcjXfpco1i8Hh55uHVxcua10+lEEYB5f6Ao9wRRyMuE/LAh0n665OMw13ZcmdXnoPIymZvAvLP92TC6eFZp0FAlRhndox4zJ4/5ebK29McuHImDoh15rykiMrEp554IEi2KPKm+YKfLBsShCAc8V6LGyIpKBMaTbPyHTu5JJ+lOFqER5V9vjDVlAoywPiEXN58mA8FLyDOZLwQWEYzIl/eJ5wnE7QEXAp2HphU4l8+O6vDHC4bDurh0ZwFmxF4mqwOB/66Y9b9diqcPQDDMD8EqpiMsJuU4+uC/in53bVFJ3nUUv/MrbaIjCH/9WgN8yjBA2KFcWfQ6VExvIKG7UNMrsYdiAYQ974Id34YaS0r6Vx4TWrNtHsAapvZLjJ81WknHCBgUDUEPMVSc/otNE6wmZ3t3efjl822p5PRWDSpYOYHiffcVCEWPYgpzdGzxJuv7uCdNo9TaKa4b0eLlwoL/UAcwKSo8p2IaASxgAeWITGNeSjqRXkFcaJZARMP0aNrJwGCsyesq9tsLpCrt8p/wC2IkRqNGXrcgc3ei1qvDgLEZGFwYi9CPGTj5BaLS00HPjrueTcjyqfPnyYx2Oc8b048sp4Uo6S3gtd6oco/+Kbr8c6oz0Zg=
+   file_glob: true
+   file: /tmp/wheels/*.whl
+   on:
+      tags: true
